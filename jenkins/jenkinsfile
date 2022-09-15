@@ -34,13 +34,27 @@ pipeline {
         stage('Deploy') {
             steps {
                 script{
+                    properties([
+                        parameters([
+                            string(
+                                defaultValue: 'i-0305c7611bebcbd78', 
+                                name: 'INSTANCE_ID', 
+                                trim: true
+                            )
+                        ])
+                    ])
                     try{
                         
                        sh''' #!/bin/bash
                         pwd
                         echo " "
+
+                        STATE_FULL=$(aws ec2 describe-instances --instance-id "${INSTANCE_ID}" --region us-east-2)
+                        PUBLIC_DNS=$(echo $STATE_FULL | jq -r '.Reservations[0].Instances[0].PublicIpAddress')
+
                         chmod 777 index.html
-                        scp -i /var/jenkins_home/workshop.pem -o stricthostkeychecking=no index.html ec2-user@3.133.141.57:/var/www/html
+                        
+                        scp -i /var/jenkins_home/workshop.pem -o stricthostkeychecking=no index.html ec2-user@${PUBLIC_DNS}:/var/www/html
 
                         '''
 
