@@ -39,7 +39,7 @@ pipeline {
                        sh''' #!/bin/bash
                         pwd
                         echo " "
-                        
+                        chmod 777 index.html
                         scp -i /var/jenkins_home/workshop.pem index.html ec2-user@3.145.84.147:/var/www/html/index.html
 
                         '''
