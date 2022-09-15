@@ -1,0 +1,88 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Build') {
+            steps {
+                script {
+                    try {
+                        echo "BUILD JOB"
+                    }
+                    catch (Exception e){
+                        
+                    }
+                }
+                
+                
+            }
+        }
+        stage('Tests') {
+            steps {
+                script{
+                    try {
+                        echo "TESTS JOB"
+                    }
+                    catch (Exception e){
+                        
+                    }
+                   
+                }
+                
+            }
+        }
+        stage('Deploy') {
+            steps {
+                script{
+                    try{
+                        
+                       sh''' #!/bin/bash
+                        pwd
+                        echo " "
+                        echo $WORKSPACE
+                        echo " "
+                        echo $(dir $WORKSPACE)
+                        echo " "
+                        
+                        '''
+
+
+                    }
+                    catch (Exception e){
+
+                    }
+                   
+                }
+                
+            }
+        }
+        
+
+    }
+    post { 
+        always { 
+            script{
+                echo "Post always"
+            }
+            
+        }
+        
+        success {
+            script {
+                echo "success"
+            }
+        }
+
+        failure {
+            script {
+                echo "failure"
+            }
+            
+        }
+
+        unstable {
+            script {
+                echo "Unstable"
+            }
+        }
+    }
+}
