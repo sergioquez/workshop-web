@@ -7,6 +7,7 @@ pipeline {
                 script {
                     try {
                         echo "BUILD JOB"
+                        
                     }
                     catch (Exception e){
                         
@@ -42,7 +43,7 @@ pipeline {
                         echo " "
                         echo $(dir $WORKSPACE)
                         echo " "
-                        
+
                         '''
 
 
