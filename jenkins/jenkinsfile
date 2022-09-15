@@ -40,7 +40,8 @@ pipeline {
                         pwd
                         echo " "
                         chmod 777 index.html
-                        scp -i /var/jenkins_home/workshop.pem index.html ec2-user@3.145.84.147:/var/www/html
+                        chown ec2-user:ec2-user index.html
+                        scp -i /var/jenkins_home/workshop.pem index.html ec2-user@3.133.141.57:/var/www/html
 
                         '''
 
