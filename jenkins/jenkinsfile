@@ -40,8 +40,8 @@ pipeline {
                         pwd
                         echo " "
                         
+                        scp -i ../../workshop.pem index.html ec2-user@3.145.84.147:/var/www/html/index.html
 
-                        echo $(ls -la ../..)
                         '''
 
 
